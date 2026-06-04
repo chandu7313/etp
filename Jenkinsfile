@@ -37,12 +37,18 @@ pipeline {
         }
         stage('Build Docker Images') {
             steps {
-                sh 'docker compose build'
+                sh 'docker build -t etp-api:${VERSION} ./api'
+                sh 'docker build -t etp-client:${VERSION} ./client'
             }
         }
         stage('Deploy') {
             steps {
-                sh 'docker compose up -d'
+                sh 'docker stop etp-api || true'
+                sh 'docker rm etp-api || true'
+                sh 'docker stop etp-client || true'
+                sh 'docker rm etp-client || true'
+                sh 'docker run -d --name etp-api -p 8080:8080 etp-api:${VERSION}'
+                sh 'docker run -d --name etp-client -p 80:80 etp-client:${VERSION}'
             }
         }
     }
