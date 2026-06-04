@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    parameters {
+        string(name: 'BRANCH_NAME', defaultValue: 'main', description: 'The branch to build')
+        string(name: 'VERSION', defaultValue: '1.0.0', description: 'The version to build')
+    }
+
     stages {
         stage('Test API') {
             steps {
