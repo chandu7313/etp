@@ -10,7 +10,7 @@ pipeline {
         stage('Test API') {
             steps {
                 dir('api') {
-                    sh 'mvn test'
+                    sh './mvnw test'
                 }
             }
             post {
@@ -24,7 +24,7 @@ pipeline {
         stage('Build API') {
             steps {
                 dir('api') {
-                    sh 'mvn clean package -DskipTests'
+                    sh './mvnw clean package -DskipTests'
                 }
             }
             post {
