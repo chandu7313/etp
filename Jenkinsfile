@@ -47,8 +47,8 @@ pipeline {
                 sh 'docker rm etp-api || true'
                 sh 'docker stop etp-client || true'
                 sh 'docker rm etp-client || true'
-                sh 'docker run -d --name etp-api -p 8080:8080 etp-api:${VERSION}'
-                sh 'docker run -d --name etp-client -p 80:80 etp-client:${VERSION}'
+                sh 'docker run -d --name etp-api -p 9090:8080 etp-api:${VERSION}'
+                sh 'docker run -d --name etp-client -p 8081:80 etp-client:${VERSION}'
             }
         }
     }
